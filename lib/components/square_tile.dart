@@ -1,17 +1,21 @@
+import 'package:chess/chess_provider.dart';
 import 'package:chess/components/piece.dart';
 import 'package:chess/values.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SquareTile extends StatelessWidget {
-  const SquareTile({super.key,required this.isWhite, this.piece, required this.isSelected, required this.onTap, required this.isValidMove});
+  const SquareTile({super.key,required this.isWhite, this.piece, required this.isSelected, required this.isValidMove, required this.row, required this.col});
   final bool isSelected;
   final ChessPiece? piece;
   final bool isWhite;
   final bool isValidMove;
-  final void Function() onTap;
+  final int row;
+  final int col;
 
   @override
   Widget build(BuildContext context) {
+    var gameLogic = Provider.of<ChessProvider>(context, listen: false);
     Color? squareColor;
     //check if the square is selected
     if(isSelected){
@@ -29,7 +33,7 @@ class SquareTile extends StatelessWidget {
 
 
     return GestureDetector(
-      onTap: onTap,
+      onTap:() => gameLogic.selectPiece(row, col,context),
       child: Container(padding: const EdgeInsets.all(4),
         margin: isValidMove?const EdgeInsets.all(5):null,
         color: squareColor,
