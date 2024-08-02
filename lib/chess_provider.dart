@@ -98,6 +98,7 @@ class ChessProvider extends ChangeNotifier {
       }
     }
 
+
     // Place queen
     newBoard[0][3] = const ChessPiece(
       type: ChessPieceType.queen,
@@ -284,7 +285,9 @@ class ChessProvider extends ChangeNotifier {
             ),
             actions: [
               TextButton(
-                onPressed:(){resetGame(context);} ,
+                onPressed:(){
+                  Navigator.pop(context);
+                  resetGame(context);} ,
                 child: const Text(
                   "Play again",
                   style: TextStyle(fontSize: 16),
@@ -470,7 +473,6 @@ class ChessProvider extends ChangeNotifier {
 
 // RESET THE GAME
   void resetGame(BuildContext context) {
-    Navigator.pop(context);
     initializeBoard();
     checkStatus = false;
     whiteKilledPieces.clear();
@@ -478,7 +480,9 @@ class ChessProvider extends ChangeNotifier {
     whiteKingPosition = [7, 4];
     blackKingPosition = [0, 4];
     isWhiteTurn = true;
-
     notifyListeners();
   }
 }
+
+
+

@@ -1,6 +1,9 @@
 import 'package:chess/game_board.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
+
+import 'chess_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -36,6 +39,8 @@ class HomeScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => const GameBoard()),
                 );
+
+                Provider.of<ChessProvider>(context, listen: false).resetGame(context);
               },
               child: const Text('Start Game',
                   style: TextStyle(
